@@ -6,14 +6,14 @@ export default function SignupForm() {
     <Container>
       <Form>
         <p>Nome:</p>
-        <input></input>
+        <input type="text" placeholder="Fulano"></input>
         <p>E-mail:</p>
-        <input></input>
+        <input type="email" placeholder="fulano@uol.com"></input>
         <p>Senha:</p>
-        <input></input>
+        <input type="password" placeholder="******"></input>
         <p>Confirme senha:</p>
-        <input></input>
-        <button>Cadastrar</button>
+        <input type="password" placeholder="******"></input>
+        <button type="submit">Cadastrar</button>
         <Link to="/users/signin">
           <h3>Já possui cadastro? Faça login aqui.</h3>
         </Link>
