@@ -8,6 +8,7 @@ import Signin from "./signin/Signin";
 import Dashboard from "./dashboard/Dashboard";
 import NewLink from "./newLink/NewLink";
 import ViewLinks from "./viewLinks/ViewLinks";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [userData, setUserData] = React.useState();
