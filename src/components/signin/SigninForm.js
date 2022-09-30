@@ -6,10 +6,10 @@ export default function SigninForm() {
     <Container>
       <Form>
         <p>E-mail:</p>
-        <input></input>
+        <input type="email"></input>
         <p> Senha:</p>
-        <input></input>
-        <button>Entrar</button>
+        <input type="password"></input>
+        <button type="submit">Entrar</button>
         <Link to="/users/signup">
           <h3>Ainda não possui cadastro? Faça cadastro aqui.</h3>
         </Link>
