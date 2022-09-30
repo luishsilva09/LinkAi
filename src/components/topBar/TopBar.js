@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Logo from "../assets/atom.png";
+import Logo from "../../assets/atom.png";
 import { Link } from "react-router-dom";
-import UserContext from "../context/userContext";
+import UserContext from "../../context/userContext";
 import { BiExit } from "react-icons/bi";
 
 export default function TopBar() {
