@@ -1,23 +1,92 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import api from "../../services/api";
+import { ToastContainer, toast } from "react-toastify";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function SignupForm() {
+  const [newUserData, setNewUserData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    repeatPassword: "",
+  });
+  const [load, setLoad] = useState(false);
+  const navigate = useNavigate();
+
+  async function sendSignup(event) {
+    event.preventDefault();
+    setLoad(true);
+    await api
+      .post("/users/signup", newUserData)
+      .then((res) => {
+        toast.success("Criado com sucesso", {
+          closeOnClick: true,
+          pauseOnHover: false,
+        });
+        setLoad(false);
+        navigate("/users/signin");
+      })
+      .catch((error) => {
+        toast.error("Verifique seus dados", {
+          closeOnClick: true,
+          pauseOnHover: false,
+        });
+        setLoad(false);
+      });
+  }
   return (
     <Container>
-      <Form>
+      <Form onSubmit={(event) => sendSignup(event)}>
         <p>Nome:</p>
-        <input type="text" placeholder="Fulano"></input>
+        <input
+          type="text"
+          placeholder="Fulano"
+          disabled={load}
+          value={newUserData.name}
+          onChange={(e) =>
+            setNewUserData({ ...newUserData, name: e.target.value })
+          }
+        />
         <p>E-mail:</p>
-        <input type="email" placeholder="fulano@uol.com"></input>
+        <input
+          type="email"
+          placeholder="fulano@uol.com"
+          disabled={load}
+          value={newUserData.email}
+          onChange={(e) =>
+            setNewUserData({ ...newUserData, email: e.target.value })
+          }
+        />
         <p>Senha:</p>
-        <input type="password" placeholder="******"></input>
+        <input
+          type="password"
+          placeholder="******"
+          disabled={load}
+          value={newUserData.password}
+          onChange={(e) =>
+            setNewUserData({ ...newUserData, password: e.target.value })
+          }
+        />
         <p>Confirme senha:</p>
-        <input type="password" placeholder="******"></input>
-        <button type="submit">Cadastrar</button>
+        <input
+          type="password"
+          placeholder="******"
+          disabled={load}
+          value={newUserData.repeatPassword}
+          onChange={(e) =>
+            setNewUserData({ ...newUserData, repeatPassword: e.target.value })
+          }
+        />
+        <button type="submit" disabled={load}>
+          {load ? <ThreeDots color="#fff" /> : <>Cadastrar</>}
+        </button>
         <Link to="/users/signin">
           <h3>Já possui cadastro? Faça login aqui.</h3>
         </Link>
       </Form>
+      <ToastContainer />
     </Container>
   );
 }
@@ -68,6 +137,9 @@ const Form = styled.form`
     color: #fff;
     font-size: 20px;
     margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     &:hover {
       cursor: pointer;
       filter: brightness(130%);
