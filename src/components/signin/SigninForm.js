@@ -1,19 +1,71 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import api from "../../services/api";
+import { ToastContainer, toast } from "react-toastify";
+import { ThreeDots } from "react-loader-spinner";
+import UserContext from "../../context/userContext";
 
 export default function SigninForm() {
+  const { setUserData } = useContext(UserContext);
+  const [load, setLoad] = useState(false);
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: "",
+  });
+  const navigate = useNavigate();
+
+  async function sendLogin(event) {
+    event.preventDefault();
+    setLoad(true);
+    await api
+      .post("/users/signin", loginData)
+      .then((res) => {
+        setLoad(false);
+        setUserData(res.data);
+        navigate("/dashboard");
+      })
+      .catch((error) => {
+        toast.error("Verifique seus dados", {
+          closeOnClick: true,
+          pauseOnHover: false,
+        });
+        setLoad(false);
+      });
+  }
+
   return (
     <Container>
-      <Form>
+      <Form onSubmit={(event) => sendLogin(event)}>
         <p>E-mail:</p>
-        <input type="email"></input>
+        <input
+          type="email"
+          placeholder="e-mail"
+          disabled={load}
+          value={loginData.email}
+          onChange={(e) =>
+            setLoginData({ ...loginData, email: e.target.value })
+          }
+        />
         <p> Senha:</p>
-        <input type="password"></input>
-        <button type="submit">Entrar</button>
+        <input
+          type="password"
+          placeholder="senha"
+          disabled={load}
+          value={loginData.password}
+          onChange={(e) =>
+            setLoginData({ ...loginData, password: e.target.value })
+          }
+        />
+        <button type="submit" disabled={load}>
+          {load ? <ThreeDots color="#fff" /> : <>Entrar</>}
+        </button>
+
         <Link to="/users/signup">
           <h3>Ainda não possui cadastro? Faça cadastro aqui.</h3>
         </Link>
       </Form>
+      <ToastContainer />
     </Container>
   );
 }
@@ -64,6 +116,9 @@ const Form = styled.form`
     color: #fff;
     font-size: 20px;
     margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     &:hover {
       cursor: pointer;
       filter: brightness(130%);
