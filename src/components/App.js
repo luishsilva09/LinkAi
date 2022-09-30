@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UserContext from "../context/userContext";
 import GlobalStyle from "./globalStyles";
 import Home from "./Home";
-import TopBar from "./TopBar";
+import Signin from "./signin/Signin";
 
 function App() {
   const [userData, setUserData] = React.useState();
@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/users/signup" element={""} />
-          <Route path="/users/signin" element={""} />
+          <Route path="/users/signin" element={<Signin />} />
           <Route path="/dashboard" element={""} />
           <Route path="/links/create" element={""} />
           <Route path="/view/:userId" element={""} />
