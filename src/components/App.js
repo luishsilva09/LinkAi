@@ -6,6 +6,7 @@ import Home from "./home/Home";
 import Signup from "./signup/Signup";
 import Signin from "./signin/Signin";
 import Dashboard from "./dashboard/Dashboard";
+import NewLink from "./newLink/NewLink";
 
 function App() {
   const [userData, setUserData] = React.useState();
@@ -18,7 +19,7 @@ function App() {
           <Route path="/users/signup" element={<Signup />} />
           <Route path="/users/signin" element={<Signin />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/links/create" element={""} />
+          <Route path="/links/create" element={<NewLink />} />
           <Route path="/view/:userId" element={""} />
         </Routes>
       </BrowserRouter>

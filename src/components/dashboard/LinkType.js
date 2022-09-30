@@ -9,7 +9,7 @@ export default function LinkType() {
           src="https://sm.ign.com/ign_br/screenshot/default/goku_trw2.jpg"
           alt=""
         />
-        <p>adlkn</p>
+        <p>Instagram</p>
       </Info>
       <Edit>
         <Pencil />

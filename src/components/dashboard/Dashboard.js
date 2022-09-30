@@ -2,6 +2,7 @@ import styled from "styled-components";
 import TopBar from "../topBar/TopBar";
 import { AiFillPlusCircle } from "react-icons/ai";
 import LinkType from "./LinkType";
+import { Link } from "react-router-dom";
 
 export default function Dashboard() {
   return (
@@ -20,7 +21,9 @@ export default function Dashboard() {
         </UserInfo>
         <Title>
           <h2>Meus links:</h2>
-          <Plus />
+          <Link to="/links/create">
+            <Plus />
+          </Link>
         </Title>
         <LinksContent>
           <LinkType />
