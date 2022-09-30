@@ -1,12 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import Logo from "../../assets/atom.png";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import UserContext from "../../context/userContext";
 import { BiExit } from "react-icons/bi";
 
 export default function TopBar() {
-  const { userData } = React.useContext(UserContext);
+  const { userData, setUserData } = React.useContext(UserContext);
+  const navigate = useNavigate();
+  function logout() {
+    setUserData();
+    navigate("/");
+  }
   return (
     <Container>
       <LeftSide>
@@ -15,7 +20,7 @@ export default function TopBar() {
       </LeftSide>
       <RightSide>
         {userData ? (
-          <span>
+          <span onClick={() => logout()}>
             <BiExit size={"30"}></BiExit>
           </span>
         ) : (
