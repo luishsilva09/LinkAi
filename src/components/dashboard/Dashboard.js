@@ -27,6 +27,7 @@ export default function Dashboard() {
           <LinkType />
           <LinkType />
         </LinksContent>
+        <button>Preview</button>
       </Content>
     </Container>
   );
@@ -42,9 +43,24 @@ const Content = styled.div`
   display: flex;
   flex-wrap: wrap;
   height: 100%;
+  justify-content: center;
   h2 {
     font-size: 30px;
     margin: 15px;
+  }
+  button {
+    width: 300px;
+    height: 50px;
+    border: none;
+    border-radius: 20px;
+    background-color: #0ba035;
+    font-size: 30px;
+    color: #fff;
+    margin: 20px;
+    &:hover {
+      cursor: pointer;
+      filter: brightness(130%);
+    }
   }
 
   @media (max-width: 500px) {

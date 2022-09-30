@@ -28,6 +28,7 @@ const LinkContainer = styled.div`
   margin-top: 15px;
   border-radius: 20px;
   padding: 10px;
+  width: 100%;
 `;
 const Info = styled.div`
   display: flex;
