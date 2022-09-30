@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import Logo from "../../assets/atom.png";
-import SigninForm from "./SigninForm";
 import { Link } from "react-router-dom";
+import SignupForm from "./SignupForm";
 
-export default function Signin() {
+export default function Signup() {
   return (
     <>
       <Container>
@@ -15,8 +15,8 @@ export default function Signin() {
         </Left>
 
         <Right>
-          <h2>Entrar</h2>
-          <SigninForm />
+          <h2>Cadastrar</h2>
+          <SignupForm />
         </Right>
       </Container>
     </>

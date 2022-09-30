@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UserContext from "../context/userContext";
 import GlobalStyle from "./globalStyles";
 import Home from "./Home";
+import Signup from "./signup/Signup";
 import Signin from "./signin/Signin";
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/users/signup" element={""} />
+          <Route path="/users/signup" element={<Signup />} />
           <Route path="/users/signin" element={<Signin />} />
           <Route path="/dashboard" element={""} />
           <Route path="/links/create" element={""} />
