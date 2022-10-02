@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { BsPencilFill, BsFillTrashFill } from "react-icons/bs";
 
-export default function LinkType() {
+export default function LinkType({ linkData }) {
   return (
     <LinkContainer>
       <Info>
@@ -9,7 +9,9 @@ export default function LinkType() {
           src="https://sm.ign.com/ign_br/screenshot/default/goku_trw2.jpg"
           alt=""
         />
-        <p>Instagram</p>
+        <Text>
+          <p>{linkData.tag}</p>
+        </Text>
       </Info>
       <Edit>
         <Pencil />
@@ -65,5 +67,11 @@ const Trash = styled(BsFillTrashFill)`
     cursor: pointer;
     filter: brightness(130%);
     color: red;
+  }
+`;
+
+const Text = styled.div`
+  h4 {
+    font-size: 10px;
   }
 `;

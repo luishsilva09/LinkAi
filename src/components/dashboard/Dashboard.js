@@ -2,9 +2,39 @@ import styled from "styled-components";
 import TopBar from "../topBar/TopBar";
 import { AiFillPlusCircle } from "react-icons/ai";
 import LinkType from "./LinkType";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import UserContext from "../../context/userContext";
+import api from "../../services/api";
+
+function render(userData, linksData) {}
 
 export default function Dashboard() {
+  const { userData } = useContext(UserContext);
+  const [userLinks, setUserLinks] = useState();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getLinks();
+  }, []);
+
+  if (userData === undefined) {
+    window.location.assign("/");
+    return <>erro 404</>;
+  }
+  const config = {
+    headers: {
+      Authorization: `Bearer ${userData.token}`,
+    },
+  };
+
+  async function getLinks() {
+    await api.get(`/links`, config).then((res) => {
+      setUserLinks(res.data);
+      console.log(res.data);
+    });
+  }
+
   return (
     <Container>
       <TopBar />
@@ -15,8 +45,9 @@ export default function Dashboard() {
             alt="foto perfil"
           />
           <span>
-            <p>Luis henrique</p>
-            <h3>luishsilva09@gmail.com</h3>
+            <p>{userData.name}</p>
+            <h3>{userData.email}</h3>
+            <h3>Link</h3>
           </span>
         </UserInfo>
         <Title>
@@ -26,9 +57,11 @@ export default function Dashboard() {
           </Link>
         </Title>
         <LinksContent>
-          <LinkType />
-          <LinkType />
-          <LinkType />
+          {userLinks ? (
+            userLinks.map((e) => <LinkType linkData={e} />)
+          ) : (
+            <>load</>
+          )}
         </LinksContent>
         <button>Preview</button>
       </Content>
