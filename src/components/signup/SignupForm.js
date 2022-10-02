@@ -11,6 +11,7 @@ export default function SignupForm() {
     email: "",
     password: "",
     repeatPassword: "",
+    imageUrl: "",
   });
   const [load, setLoad] = useState(false);
   const navigate = useNavigate();
@@ -79,6 +80,16 @@ export default function SignupForm() {
             setNewUserData({ ...newUserData, repeatPassword: e.target.value })
           }
         />
+        <p>Foto perfil:</p>
+        <input
+          type="text"
+          placeholder="URL"
+          disabled={load}
+          value={newUserData.imageUrl}
+          onChange={(e) =>
+            setNewUserData({ ...newUserData, imageUrl: e.target.value })
+          }
+        />
         <button type="submit" disabled={load}>
           {load ? <ThreeDots color="#fff" /> : <>Cadastrar</>}
         </button>
@@ -98,7 +109,7 @@ const Container = styled.div`
   border-radius: 20px;
   height: 600px;
   width: 100%;
-  padding: 50px 20px 30px 20px;
+  padding: 5px 20px 30px 20px;
   flex-wrap: wrap;
   max-width: 500px;
 `;

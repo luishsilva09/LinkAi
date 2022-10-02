@@ -33,18 +33,4 @@ const Content = styled.div`
     border-bottom: 1px solid black;
     margin-top: 15px;
   }
-  button {
-    width: 300px;
-    height: 50px;
-    border: none;
-    border-radius: 20px;
-    background-color: #0ba035;
-    font-size: 30px;
-    color: #fff;
-    margin: 20px;
-    &:hover {
-      cursor: pointer;
-      filter: brightness(130%);
-    }
-  }
 `;

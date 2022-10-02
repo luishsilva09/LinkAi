@@ -7,8 +7,6 @@ import { useContext, useEffect, useState } from "react";
 import UserContext from "../../context/userContext";
 import api from "../../services/api";
 
-function render(userData, linksData) {}
-
 export default function Dashboard() {
   const { userData } = useContext(UserContext);
   const [userLinks, setUserLinks] = useState();
@@ -31,7 +29,6 @@ export default function Dashboard() {
   async function getLinks() {
     await api.get(`/links`, config).then((res) => {
       setUserLinks(res.data);
-      console.log(res.data);
     });
   }
 
@@ -40,14 +37,11 @@ export default function Dashboard() {
       <TopBar />
       <Content>
         <UserInfo>
-          <img
-            src="https://sm.ign.com/ign_br/screenshot/default/goku_trw2.jpg"
-            alt="foto perfil"
-          />
+          <img src={userData.imageUrl} alt="foto perfil" />
           <span>
             <p>{userData.name}</p>
             <h3>{userData.email}</h3>
-            <h3>Link</h3>
+            <h4>{userData.urlId}</h4>
           </span>
         </UserInfo>
         <Title>
@@ -117,6 +111,9 @@ const UserInfo = styled.div`
     object-fit: cover;
     border-radius: 50%;
     margin: 15px;
+  }
+  h4 {
+    font-size: 10px;
   }
 `;
 const Title = styled.div`

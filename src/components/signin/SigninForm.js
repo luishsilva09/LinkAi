@@ -5,6 +5,7 @@ import api from "../../services/api";
 import { ToastContainer, toast } from "react-toastify";
 import { ThreeDots } from "react-loader-spinner";
 import UserContext from "../../context/userContext";
+import jwt_decode from "jwt-decode";
 
 export default function SigninForm() {
   const { setUserData } = useContext(UserContext);
@@ -22,7 +23,7 @@ export default function SigninForm() {
       .post("/users/signin", loginData)
       .then((res) => {
         setLoad(false);
-        setUserData(res.data);
+        setUserData({ ...jwt_decode(res.data), token: res.data });
         navigate("/dashboard");
       })
       .catch((error) => {
