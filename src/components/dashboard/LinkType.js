@@ -5,10 +5,7 @@ export default function LinkType({ linkData }) {
   return (
     <LinkContainer>
       <Info>
-        <img
-          src="https://sm.ign.com/ign_br/screenshot/default/goku_trw2.jpg"
-          alt=""
-        />
+        <img src={linkData.previewImage} alt={linkData.tag} />
         <Text>
           <p>{linkData.tag}</p>
         </Text>

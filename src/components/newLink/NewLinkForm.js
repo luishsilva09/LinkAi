@@ -18,7 +18,6 @@ export default function NewLInkForm() {
     window.location.assign("/");
     return <>erro 404</>;
   }
-  console.log(userData);
   const config = {
     headers: {
       Authorization: `Bearer ${userData.token}`,
@@ -69,8 +68,8 @@ export default function NewLInkForm() {
             setlinkData({ ...linkData, originalLink: e.target.value })
           }
         />
-        <h3>Link imagem:</h3>
-        <input type="text" placeholder="" disabled={load} />
+        {/* <h3>Link imagem:</h3>
+        <input type="text" placeholder="" disabled={load} /> */}
         <button type="submit">
           {load ? <ThreeDots color="#fff" /> : <>Adicionar</>}
         </button>
