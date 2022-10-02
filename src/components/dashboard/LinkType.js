@@ -1,20 +1,40 @@
 import styled from "styled-components";
 import { BsPencilFill, BsFillTrashFill } from "react-icons/bs";
+import api from "../../services/api";
+import { useContext } from "react";
+import UserContext from "../../context/userContext";
+import { ToastContainer, toast } from "react-toastify";
 
-export default function LinkType({ linkData }) {
+export default function LinkType({ linkData, setReload }) {
+  const { userData } = useContext(UserContext);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${userData.token}`,
+    },
+  };
+  async function deleteLink(linkId) {
+    await api.delete(`/links/${linkId}`, config).then(() => {
+      toast.success("Deletado com sucesso");
+      setReload(1);
+    });
+  }
+
   return (
-    <LinkContainer>
-      <Info>
-        <img src={linkData.previewImage} alt={linkData.tag} />
-        <Text>
-          <p>{linkData.tag}</p>
-        </Text>
-      </Info>
-      <Edit>
-        <Pencil />
-        <Trash />
-      </Edit>
-    </LinkContainer>
+    <>
+      <LinkContainer>
+        <Info>
+          <img src={linkData.previewImage} alt={linkData.tag} />
+          <Text>
+            <p>{linkData.tag}</p>
+          </Text>
+        </Info>
+        <Edit>
+          <Pencil />
+          <Trash onClick={() => deleteLink(linkData.id)} />
+        </Edit>
+      </LinkContainer>
+      <ToastContainer />
+    </>
   );
 }
 

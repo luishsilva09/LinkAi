@@ -2,7 +2,7 @@ import styled from "styled-components";
 import TopBar from "../topBar/TopBar";
 import { AiFillPlusCircle } from "react-icons/ai";
 import LinkType from "./LinkType";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "../../context/userContext";
 import api from "../../services/api";
@@ -10,11 +10,11 @@ import api from "../../services/api";
 export default function Dashboard() {
   const { userData } = useContext(UserContext);
   const [userLinks, setUserLinks] = useState();
-  const navigate = useNavigate();
+  const [reload, setReload] = useState(0);
 
   useEffect(() => {
     getLinks();
-  }, []);
+  }, [reload]);
 
   if (userData === undefined) {
     window.location.assign("/");
@@ -50,13 +50,15 @@ export default function Dashboard() {
           </Link>
         </Title>
         <LinksContent>
-          {userLinks ? (
-            userLinks.map((e) => <LinkType linkData={e} />)
+          {userLinks && userLinks.length > 0 ? (
+            userLinks.map((e) => (
+              <LinkType linkData={e} setReload={setReload} />
+            ))
           ) : (
-            <>load</>
+            <>Não possui links ainda...</>
           )}
         </LinksContent>
-        <button>Preview</button>
+        <button className="preview">Preview</button>
       </Content>
     </Container>
   );
@@ -77,7 +79,7 @@ const Content = styled.div`
     font-size: 30px;
     margin: 15px;
   }
-  button {
+  .preview {
     width: 300px;
     height: 50px;
     border: none;
