@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import TopBar from "../topBar/TopBar";
 import api from "../../services/api";
 import { Oval } from "react-loader-spinner";
 import Links from "./Links";

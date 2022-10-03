@@ -58,7 +58,12 @@ export default function Dashboard() {
             <>Não possui links ainda...</>
           )}
         </LinksContent>
-        <button className="preview">Preview</button>
+        <button
+          className="preview"
+          onClick={() => window.open(`/view/${userData.urlId}`)}
+        >
+          Preview
+        </button>
       </Content>
     </Container>
   );
