@@ -51,8 +51,8 @@ export default function Dashboard() {
         </Title>
         <LinksContent>
           {userLinks && userLinks.length > 0 ? (
-            userLinks.map((e) => (
-              <LinkType linkData={e} setReload={setReload} />
+            userLinks.map((e, index) => (
+              <LinkType key={index} linkData={e} setReload={setReload} />
             ))
           ) : (
             <>Não possui links ainda...</>
