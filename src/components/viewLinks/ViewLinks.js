@@ -39,13 +39,23 @@ export default function ViewLinks() {
       ) : (
         contentRender(userData)
       )}
+      <Logo>LinkAí</Logo>
     </Container>
   );
 }
-const Container = styled.div`
+
+const Logo = styled.div`
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  color: #fff;
+`;
+const Container = styled.body`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
+  background-color: #094b64;
 `;
 
 const Content = styled.div`
@@ -63,6 +73,7 @@ const Content = styled.div`
     width: 100%;
     text-align: center;
     font-size: 30px;
+    color: #fff;
   }
 `;
 
