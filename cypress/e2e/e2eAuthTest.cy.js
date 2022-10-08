@@ -3,6 +3,25 @@ import { faker } from "@faker-js/faker";
 const API_URL = Cypress.env("API_URL");
 const FRONT_URL = Cypress.env("FRONT_URL");
 
+function createUserData() {
+  return {
+    name: faker.name.firstName(),
+    email: faker.internet.email(),
+    password: faker.internet.password(8),
+    imageUrl: faker.internet.avatar(),
+  };
+}
+beforeEach(async () => {
+  await cy.resetDatabase();
+});
+
+Cypress.Commands.add("resetDatabase", () => {
+  cy.request("POST", `${API_URL}/reset-database`);
+});
+
+Cypress.Commands.add("createUser", (data) => {
+  cy.request("POST", `${API_URL}/users/signup`, { ...data });
+});
 describe("Auth routes", () => {
   it("Signup route", () => {
     const userData = {
