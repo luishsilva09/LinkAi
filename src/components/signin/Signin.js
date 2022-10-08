@@ -26,6 +26,7 @@ export default function Signin() {
 const Container = styled.div`
   background-color: #094b64;
   display: flex;
+  height: 100vh;
   a {
     text-decoration: none;
   }
@@ -34,6 +35,9 @@ const Container = styled.div`
     height: 100vh;
     align-items: center;
     justify-content: center;
+  }
+  @media (max-height: 460px) {
+    height: 100%;
   }
 `;
 const Right = styled.div`
@@ -58,7 +62,6 @@ const Right = styled.div`
 `;
 const Left = styled.div`
   background-color: #091d64;
-  height: 100vh;
   width: 52%;
   display: flex;
   flex-direction: column;
