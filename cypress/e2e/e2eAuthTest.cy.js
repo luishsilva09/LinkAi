@@ -22,14 +22,10 @@ Cypress.Commands.add("resetDatabase", () => {
 Cypress.Commands.add("createUser", (data) => {
   cy.request("POST", `${API_URL}/users/signup`, { ...data });
 });
+
 describe("Auth routes", () => {
   it("Signup route", () => {
-    const userData = {
-      name: faker.name.firstName(),
-      email: faker.internet.email(),
-      password: faker.internet.password(8),
-      imageUrl: faker.internet.avatar(),
-    };
+    const userData = createUserData();
     cy.visit(`${FRONT_URL}/users/signup`);
 
     cy.get('[data-cy="name"]').type(userData.name);
@@ -47,5 +43,25 @@ describe("Auth routes", () => {
     });
     cy.url().should("equal", `${FRONT_URL}/users/signin`);
   });
-  //   it.todo("Signin route");
+  it("Signin route", () => {
+    const userData = createUserData();
+    const insertData = { ...userData, repeatPassword: userData.password };
+    cy.createUser(insertData);
+
+    cy.visit(`${FRONT_URL}/users/signin`);
+
+    cy.get('[data-cy="email"]').type(userData.email);
+    cy.get('[data-cy="password"]').type(userData.password);
+
+    cy.intercept("POST", `${API_URL}/users/signin`).as("submit");
+
+    cy.get('[data-cy="submitSignin"]').click();
+
+    cy.wait("@submit").then(({ req, response }) => {
+      expect(response.statusCode).equal(200);
+      expect(response.body).to.not.equal(null);
+    });
+
+    cy.url().should("equal", `${FRONT_URL}/dashboard`);
+  });
 });
