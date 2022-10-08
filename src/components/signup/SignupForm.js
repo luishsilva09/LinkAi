@@ -89,8 +89,9 @@ export default function SignupForm() {
           onChange={(e) =>
             setNewUserData({ ...newUserData, imageUrl: e.target.value })
           }
+          data-cy="imageUrl"
         />
-        <button type="submit" disabled={load}>
+        <button type="submit" disabled={load} data-cy="submitForm">
           {load ? <ThreeDots color="#fff" /> : <>Cadastrar</>}
         </button>
         <Link to="/users/signin">
