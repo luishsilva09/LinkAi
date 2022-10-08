@@ -49,6 +49,7 @@ export default function SignupForm() {
           onChange={(e) =>
             setNewUserData({ ...newUserData, name: e.target.value })
           }
+          data-cy="name"
         />
         <p>E-mail:</p>
         <input
@@ -59,6 +60,7 @@ export default function SignupForm() {
           onChange={(e) =>
             setNewUserData({ ...newUserData, email: e.target.value })
           }
+          data-cy="email"
         />
         <p>Senha:</p>
         <input
@@ -69,6 +71,7 @@ export default function SignupForm() {
           onChange={(e) =>
             setNewUserData({ ...newUserData, password: e.target.value })
           }
+          data-cy="password"
         />
         <p>Confirme senha:</p>
         <input
@@ -79,6 +82,7 @@ export default function SignupForm() {
           onChange={(e) =>
             setNewUserData({ ...newUserData, repeatPassword: e.target.value })
           }
+          data-cy="repeatPassword"
         />
         <p>Foto perfil:</p>
         <input
