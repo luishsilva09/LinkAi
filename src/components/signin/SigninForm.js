@@ -47,6 +47,7 @@ export default function SigninForm() {
           onChange={(e) =>
             setLoginData({ ...loginData, email: e.target.value })
           }
+          data-cy="email"
         />
         <p> Senha:</p>
         <input
@@ -57,8 +58,9 @@ export default function SigninForm() {
           onChange={(e) =>
             setLoginData({ ...loginData, password: e.target.value })
           }
+          data-cy="password"
         />
-        <button type="submit" disabled={load}>
+        <button type="submit" disabled={load} data-cy="submitSignin">
           {load ? <ThreeDots color="#fff" /> : <>Entrar</>}
         </button>
 
