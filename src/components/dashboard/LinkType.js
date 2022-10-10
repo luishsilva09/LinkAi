@@ -29,7 +29,6 @@ export default function LinkType({ linkData, setReload }) {
           </Text>
         </Info>
         <Edit>
-          <Pencil />
           <Trash onClick={() => deleteLink(linkData.id)} />
         </Edit>
       </LinkContainer>
