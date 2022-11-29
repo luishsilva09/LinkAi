@@ -1,13 +1,37 @@
 import styled from "styled-components";
+import api from "../../services/api";
+import { ToastContainer, toast } from "react-toastify";
+import UserContext from "../../context/userContext";
+import { useContext } from "react";
 
-export default function confirmDelete() {
+export default function ConfirmDelete({ linkId, setOpenModal, setReload }) {
+  const { userData } = useContext(UserContext);
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${userData.token}`,
+    },
+  };
+  function closeModal() {
+    setOpenModal(false);
+  }
+  async function deleteLink(linkId) {
+    await api.delete(`/links/${linkId}`, config).then(() => {
+      toast.success("Deletado com sucesso");
+      setReload(1);
+    });
+  }
   return (
-    <ContainerModal>
+    <ContainerModal onClick={() => closeModal()}>
       <ModalContent>
         <p>Deseja realmente DELETAR esse link?</p>
         <Buttons>
-          <Button color="red">Cancelar</Button>
-          <Button color="#0ba035">Deletar</Button>
+          <Button color="red" onClick={() => closeModal()}>
+            Cancelar
+          </Button>
+          <Button color="#0ba035" onClick={() => deleteLink(linkId)}>
+            Deletar
+          </Button>
         </Buttons>
       </ModalContent>
     </ContainerModal>
@@ -34,6 +58,10 @@ const ModalContent = styled.div`
   p {
     margin: 10px;
     font-size: 20px;
+  }
+
+  @media (max-width: 500px) {
+    height: 120px;
   }
 `;
 const Buttons = styled.div`
