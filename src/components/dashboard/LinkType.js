@@ -1,22 +1,14 @@
 import styled from "styled-components";
 import { BsPencilFill, BsFillTrashFill } from "react-icons/bs";
-import api from "../../services/api";
-import { useContext } from "react";
-import UserContext from "../../context/userContext";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import ConfirmDelete from "../modal/ConfirmDelete";
+import { useState } from "react";
 
 export default function LinkType({ linkData, setReload }) {
-  const { userData } = useContext(UserContext);
-  const config = {
-    headers: {
-      Authorization: `Bearer ${userData.token}`,
-    },
-  };
-  async function deleteLink(linkId) {
-    await api.delete(`/links/${linkId}`, config).then(() => {
-      toast.success("Deletado com sucesso");
-      setReload(1);
-    });
+  const [openModal, setOpenModal] = useState(false);
+
+  function handleModal() {
+    setOpenModal(true);
   }
 
   return (
@@ -29,9 +21,19 @@ export default function LinkType({ linkData, setReload }) {
           </Text>
         </Info>
         <Edit>
-          <Trash onClick={() => deleteLink(linkData.id)} />
+          <Trash onClick={() => handleModal()} />
         </Edit>
       </LinkContainer>
+
+      {openModal ? (
+        <ConfirmDelete
+          linkId={linkData.id}
+          setOpenModal={setOpenModal}
+          setReload={setReload}
+        />
+      ) : (
+        <></>
+      )}
       <ToastContainer />
     </>
   );
