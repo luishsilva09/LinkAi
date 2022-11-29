@@ -4,19 +4,30 @@ import api from "../../services/api";
 import { useContext } from "react";
 import UserContext from "../../context/userContext";
 import { ToastContainer, toast } from "react-toastify";
+import ConfirmDelete from "../modal/ConfirmDelete";
+import { useState } from "react";
 
 export default function LinkType({ linkData, setReload }) {
   const { userData } = useContext(UserContext);
+  const [openModal, setOpenModal] = useState(false);
   const config = {
     headers: {
       Authorization: `Bearer ${userData.token}`,
     },
   };
   async function deleteLink(linkId) {
-    await api.delete(`/links/${linkId}`, config).then(() => {
-      toast.success("Deletado com sucesso");
-      setReload(1);
-    });
+    console.log(" ojoa");
+    return;
+    // await api.delete(`/links/${linkId}`, config).then(() => {
+    //   toast.success("Deletado com sucesso");
+    //   setReload(1);
+    // });
+  }
+  function handleModal() {
+    setOpenModal(true);
+  }
+  function closeModal() {
+    setOpenModal(false);
   }
 
   return (
@@ -32,6 +43,8 @@ export default function LinkType({ linkData, setReload }) {
           <Trash onClick={() => deleteLink(linkData.id)} />
         </Edit>
       </LinkContainer>
+
+      {openModal ? <ConfirmDelete /> : <></>}
       <ToastContainer />
     </>
   );
