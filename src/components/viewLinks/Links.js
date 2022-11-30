@@ -1,8 +1,12 @@
 import styled from "styled-components";
 import { ImNewTab } from "react-icons/im";
+import api from "../../services/api";
+
 export default function Links({ linkData }) {
-  function redirectLink(originalLink) {
-    window.location.assign(originalLink);
+  async function redirectLink(originalLink) {
+    await api.post(`/links/acessCount/${linkData.id}`).then((res) => {
+      window.location.assign(originalLink);
+    });
   }
 
   return (
