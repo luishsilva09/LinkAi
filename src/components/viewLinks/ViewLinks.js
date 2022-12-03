@@ -39,7 +39,9 @@ export default function ViewLinks() {
       ) : (
         contentRender(userData)
       )}
-      <Logo>LinkAí</Logo>
+      <Logo>
+        <a href="/">LinkAí</a>
+      </Logo>
     </Container>
   );
 }
@@ -49,6 +51,10 @@ const Logo = styled.div`
   position: fixed;
   bottom: 0;
   color: #fff;
+  a {
+    text-decoration: none;
+    color: #fff;
+  }
 `;
 const Container = styled.body`
   display: flex;
