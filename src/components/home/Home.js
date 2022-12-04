@@ -24,7 +24,7 @@ export default function Home() {
   );
 }
 
-const Container = styled.body`
+const Container = styled.div`
   background-color: rgba(89, 159, 186, 0.73);
   height: 100vh;
   display: flex;
