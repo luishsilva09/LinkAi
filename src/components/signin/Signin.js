@@ -1,9 +1,26 @@
 import styled from "styled-components";
 import Logo from "../../assets/atom.png";
 import SigninForm from "./SigninForm";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+import React from "react";
+import UserContext from "../../context/userContext";
 
 export default function Signin() {
+  const localStorageUseToken = window.localStorage.getItem("token");
+  const { setUserData } = React.useContext(UserContext);
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (localStorageUseToken !== null) {
+      setUserData({
+        ...jwt_decode(localStorageUseToken),
+        token: localStorageUseToken,
+      });
+      navigate("/dashboard");
+      return;
+    }
+  }, []);
   return (
     <>
       <Container>

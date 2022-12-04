@@ -7,11 +7,14 @@ import { BiExit } from "react-icons/bi";
 
 export default function TopBar() {
   const { userData, setUserData } = React.useContext(UserContext);
+
   const navigate = useNavigate();
   function logout() {
     setUserData();
+    window.localStorage.clear();
     navigate("/");
   }
+
   return (
     <Container>
       <LeftSide>
@@ -28,7 +31,7 @@ export default function TopBar() {
             <Link to="/">
               <p>Home</p>
             </Link>
-            <Link to="/users/signin">
+            <Link to="users/signin">
               <p>Entrar</p>
             </Link>
             <Link to="/users/signup">

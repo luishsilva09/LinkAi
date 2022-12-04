@@ -24,6 +24,7 @@ export default function SigninForm() {
       .then((res) => {
         setLoad(false);
         setUserData({ ...jwt_decode(res.data), token: res.data });
+        window.localStorage.setItem("token", res.data);
         navigate("/dashboard");
       })
       .catch((error) => {
