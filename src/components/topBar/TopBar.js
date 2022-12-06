@@ -4,6 +4,9 @@ import Logo from "../../assets/atom.png";
 import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../../context/userContext";
 import { BiExit } from "react-icons/bi";
+import { MdOutlineSpaceDashboard } from "react-icons/md";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 
 export default function TopBar() {
   const { userData, setUserData } = React.useContext(UserContext);
@@ -19,13 +22,25 @@ export default function TopBar() {
     <Container>
       <LeftSide>
         <img src={Logo} alt="logo" />
-        <h1>LinkAí</h1>
+        <Link to="/">
+          <h1>LinkAí</h1>
+        </Link>
       </LeftSide>
       <RightSide>
         {userData ? (
-          <span onClick={() => logout()}>
-            <BiExit size={"30"}></BiExit>
-          </span>
+          <>
+            <DashboardIcon>
+              <Link to="/dashboard">
+                <p>Dashboard</p>
+              </Link>
+            </DashboardIcon>
+
+            <BiExit
+              className="exit"
+              size={"30"}
+              onClick={() => logout()}
+            ></BiExit>
+          </>
         ) : (
           <>
             <Link to="/">
@@ -72,13 +87,20 @@ const LeftSide = styled.div`
 `;
 const RightSide = styled.div`
   display: flex;
-  width: 200px;
-  justify-content: space-between;
   color: #fff;
   font-weight: 300;
-  span {
-    width: 100%;
+  width: 200px;
+  align-items: center;
+  justify-content: space-between;
+  .exit {
     text-align: right;
     cursor: pointer;
   }
+`;
+
+const DashboardIcon = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 `;
