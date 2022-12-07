@@ -5,11 +5,11 @@ import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../../context/userContext";
 import { BiExit } from "react-icons/bi";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
+import { IoIosArrowDown } from "react-icons/io";
 
 export default function TopBar() {
   const { userData, setUserData } = React.useContext(UserContext);
+  const [openMenu, setOpenMenu] = React.useState(false);
 
   const navigate = useNavigate();
   function logout() {
@@ -17,7 +17,9 @@ export default function TopBar() {
     window.localStorage.clear();
     navigate("/");
   }
-
+  function handleMenu() {
+    setOpenMenu(!openMenu);
+  }
   return (
     <Container>
       <LeftSide>
@@ -28,19 +30,20 @@ export default function TopBar() {
       </LeftSide>
       <RightSide>
         {userData ? (
-          <>
-            <DashboardIcon>
-              <Link to="/dashboard">
-                <p>Dashboard</p>
-              </Link>
-            </DashboardIcon>
-
-            <BiExit
-              className="exit"
-              size={"30"}
-              onClick={() => logout()}
-            ></BiExit>
-          </>
+          <UserMenu>
+            <IoIosArrowDown
+              size={35}
+              onClick={() => handleMenu()}
+              className={openMenu ? "rotate" : ""}
+            />
+            <img src={userData.imageUrl} alt="profile" />
+            <Menu open={openMenu ? "flex" : "none"}>
+              <MenuItem onClick={() => navigate("/dashboard")}>
+                Dashboard
+              </MenuItem>
+              <MenuItem onClick={() => logout()}>Sair</MenuItem>
+            </Menu>
+          </UserMenu>
         ) : (
           <>
             <Link to="/">
@@ -99,9 +102,48 @@ const RightSide = styled.div`
   }
 `;
 
-const DashboardIcon = styled.div`
+const UserMenu = styled.div`
+  width: 100%;
+  text-align: right;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  position: relative;
+  .rotate {
+    transform: rotate(180deg);
+  }
+
+  img {
+    border-radius: 50%;
+    height: 55px;
+    width: 55px;
+    object-fit: cover;
+    margin: 5px;
+  }
+`;
+
+const Menu = styled.div`
+  position: absolute;
+  background-color: #d9d9d9;
+  z-index: 1;
+  top: 60px;
+  right: 60px;
+  width: 100px;
+  height: 70px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  display: ${(props) => props.open};
+  flex-direction: column;
+`;
+const MenuItem = styled.div`
+  color: black;
+  font-size: 19px;
+  width: 100%;
+  height: 35px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
