@@ -67,6 +67,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0px 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 
   img {
     height: 55px;

@@ -25,7 +25,7 @@ export default function Home() {
 }
 
 const Container = styled.div`
-  background-color: rgba(89, 159, 186, 0.73);
+  background-color: #094b64;
   height: 100vh;
   display: flex;
   flex-direction: column;
