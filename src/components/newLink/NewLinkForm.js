@@ -117,5 +117,8 @@ const Form = styled.form`
       cursor: pointer;
       filter: brightness(130%);
     }
+    &:active {
+      transform: scale(0.9, 0.9);
+    }
   }
 `;

@@ -99,6 +99,9 @@ const Content = styled.div`
       cursor: pointer;
       filter: brightness(130%);
     }
+    &:active {
+      transform: scale(0.9, 0.9);
+    }
   }
 
   @media (max-width: 500px) {
@@ -136,6 +139,9 @@ const Plus = styled(AiFillPlusCircle)`
   &:hover {
     cursor: pointer;
     filter: brightness(130%);
+  }
+  &:active {
+    transform: scale(1.2, 1.2);
   }
 `;
 

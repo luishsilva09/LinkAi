@@ -92,6 +92,9 @@ const Trash = styled(BsFillTrashFill)`
     filter: brightness(130%);
     color: red;
   }
+  &:active {
+    transform: scale(1.2, 1.2);
+  }
 `;
 
 const Text = styled.div`
