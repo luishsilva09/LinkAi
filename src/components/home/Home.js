@@ -79,6 +79,8 @@ const Text = styled.div`
     font-size: 20px;
     background-color: #0ba035;
     color: #fff;
+    box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.2);
+
     &:hover {
       cursor: pointer;
       filter: brightness(130%);

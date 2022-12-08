@@ -93,6 +93,8 @@ const Content = styled.div`
     font-size: 30px;
     color: #fff;
     margin: 20px;
+    box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.2);
+
     &:hover {
       cursor: pointer;
       filter: brightness(130%);

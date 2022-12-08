@@ -31,6 +31,7 @@ const LinkContainer = styled.div`
   margin-top: 10px;
   border-radius: 20px;
   justify-content: space-between;
+
   h2 {
     font-size: 30px;
     word-break: break-all;
