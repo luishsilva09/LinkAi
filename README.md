@@ -6,7 +6,7 @@
 
 # Description
 
-This is a solution to organize and group links easily and efficiently.
+This is a solution to organize and group links easily and efficiently your links.
 
 # Tests
 
@@ -28,7 +28,7 @@ Clone the project:
 
 ```bash
 
-  git clone https://github.com/luishsilva09/LinkAi-front.git
+  git clone https://github.com/luishsilva09/LinkAi.git
 
 ```
 
